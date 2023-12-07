@@ -1,0 +1,62 @@
+<div class="container">
+  <form [formGroup]="employeFormGroup" *ngIf="employeFormGroup">
+
+    <div class = "form-group">
+      <label>Nom</label>
+      <input type ="text" class="form-control" formControlName="nom"
+             [ngClass]="{'is-invalid': submitted &&
+employeFormGroup.controls.nom.errors}">
+      <div *ngIf="submitted && employeFormGroup.controls.nom.errors" class
+        ="invalid-feedback">
+        <div *ngIf="employeFormGroup.controls.nom.errors.required">
+          Nom obligatoire
+        </div>
+      </div>
+    </div>
+    <div class = "form-group">
+      <label>Prénom</label>
+      <input type ="text" class="form-control" formControlName="prenom"
+             [ngClass]="{'is-invalid': submitted &&
+employeFormGroup.controls.prenom.errors}">
+      <div *ngIf="submitted && employeFormGroup.controls.prenom.errors"
+           class ="invalid-feedback">
+        <div *ngIf="employeFormGroup.controls.prenom.errors.required">
+          Prénom obligatoire
+        </div>
+      </div>
+    </div>
+    <div class = "form-group">
+      <label>Mail</label>
+      <input type ="text" class="form-control" formControlName="mail"
+             [ngClass]="{'is-invalid': submitted &&
+employeFormGroup.controls.prenom.errors}">
+      <div *ngIf="submitted && employeFormGroup.controls.mail.errors"
+           class ="invalid-feedback">
+        <div *ngIf="employeFormGroup.controls.mail.errors.required">
+          Mail obligatoire
+        </div>
+        <div *ngIf="employeFormGroup.controls.mail.errors.email">
+          Le format mail doit être respecté
+        </div>
+      </div>
+    </div>
+    <div class = "form-group">
+      <label>Service</label>
+       <select (click)="chargeServices()" class="form-control" formControlName="service_id" [ngClass]="{'is-invalid': submitted &&
+          employeFormGroup.controls.service_id.errors}">
+        <option *ngFor="let service of services" [value]="service.id_service" >
+          {{service.nom}}
+        </option>
+      </select>
+      <div *ngIf="submitted && employeFormGroup.controls.service_id.errors"
+           class ="invalid-feedback">
+        <div *ngIf="employeFormGroup.controls.service_id.errors.required">
+          Service obligatoire
+        </div>
+      </div>
+    </div>
+    <button (click)="onSaveEmploye()" class="btn btn-success">
+      Save
+    </button>
+  </form>
+</div>
