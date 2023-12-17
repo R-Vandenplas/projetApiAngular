@@ -1,1 +1,8 @@
-<p>messages work!</p>
+<form (ngSubmit)="onSearch()" class="form-inline">
+  <label>IDENTIFIANT DU MESSAGE</label>
+  <input [(ngModel)]="idmessage" name="idmessage" type="text" >
+  <button class="btn btn-sm btn-outline-info m-lg-2">
+    <span class = "fa fa-search"> </span>
+  </button>
+</form>
+

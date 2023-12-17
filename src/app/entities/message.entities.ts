@@ -1,9 +1,10 @@
 import { Employe } from './employe.entities';
 
 export interface Message{
-    id_message: number;
+    idmessage: number;
     objet: string;
     contenu: string;
     dateenvoi: Date;
     emetteur: Employe;
 }
+

@@ -21,13 +21,13 @@ export class ServiceService{
   }
 
   deleteService(s: Service): Observable<void>{
-    return this.http.delete<void>(this.host + '/service/' + s.id_service);
+    return this.http.delete<void>(this.host + '/service/' + s.idservice);
   }
   save(s: Service): Observable<Service>{
-    return this.http.post<Service>(this.host + '/service/', s);
+    return this.http.post<Service>(this.host + '/service', s);
   }
 
   updateService(s: Service): Observable<Service>{
-    return this.http.put<Service>(this.host + '/service/' + s.id_service, s);
+    return this.http.put<Service>(this.host + '/service/' + s.idservice, s);
   }
 }

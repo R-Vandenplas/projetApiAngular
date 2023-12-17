@@ -29,7 +29,7 @@ export class EmployesComponent implements OnInit {
       this.employeService.deleteEmploye(e).subscribe(
         {
           next: data => {
-            this.onSearch(e); //pour rafraichir la liste
+            this.employeService.searchEmploye("").subscribe({next: data => {this.employes = data}});
           },
           error: err => { alert(err.headers.get("error")); }
         }

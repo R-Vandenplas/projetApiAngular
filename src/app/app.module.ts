@@ -13,6 +13,10 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 import { NewemployeComponent } from './components/newemploye/newemploye.component';
 import { EditemployeComponent } from './components/editemploye/editemploye.component';
+import { NewserviceComponent } from './components/newservice/newservice.component';
+import { EditserviceComponent } from './components/editservice/editservice.component';
+import { NewmessageComponent } from './components/newmessage/newmessage.component';
+import { EditmessageComponent } from './components/editmessage/editmessage.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,11 @@ import { EditemployeComponent } from './components/editemploye/editemploye.compo
     MessagesComponent,
     HomeComponent,
     NewemployeComponent,
-    EditemployeComponent
+    EditemployeComponent,
+    NewserviceComponent,
+    EditserviceComponent,
+    NewmessageComponent,
+    EditmessageComponent
   ],
   imports: [
     BrowserModule,

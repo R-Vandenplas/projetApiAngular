@@ -29,7 +29,7 @@ employeFormGroup.controls.prenom.errors}">
       <label>Mail</label>
       <input type ="text" class="form-control" formControlName="mail"
              [ngClass]="{'is-invalid': submitted &&
-employeFormGroup.controls.prenom.errors}">
+employeFormGroup.controls.mail.errors}">
       <div *ngIf="submitted && employeFormGroup.controls.mail.errors"
            class ="invalid-feedback">
         <div *ngIf="employeFormGroup.controls.mail.errors.required">
@@ -42,15 +42,15 @@ employeFormGroup.controls.prenom.errors}">
     </div>
     <div class = "form-group">
       <label>Service</label>
-       <select (click)="chargeServices()" class="form-control" formControlName="service_id" [ngClass]="{'is-invalid': submitted &&
-          employeFormGroup.controls.service_id.errors}">
-        <option *ngFor="let service of services" [value]="service.id_service" >
+       <select  class="form-control" formControlName="idservice" [ngClass]="{'is-invalid': submitted &&
+          employeFormGroup.controls.idservice.errors}">
+        <option *ngFor="let service of services" [value]=service.idservice >
           {{service.nom}}
         </option>
       </select>
-      <div *ngIf="submitted && employeFormGroup.controls.service_id.errors"
+      <div *ngIf="submitted && employeFormGroup.controls.idservice.errors"
            class ="invalid-feedback">
-        <div *ngIf="employeFormGroup.controls.service_id.errors.required">
+        <div *ngIf="employeFormGroup.controls.idservice.errors.required">
           Service obligatoire
         </div>
       </div>

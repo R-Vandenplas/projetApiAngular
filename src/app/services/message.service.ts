@@ -12,19 +12,25 @@ export class MessageService{
   }
   deleteMessage(m: Message): Observable<void>{
     return this.http.delete<void>(this.host + '/message/' +
-      m.id_message);
+      m.idmessage);
   }
-  save(m: Message, emp:Employe): Observable<Message>{
-    m.emetteur=emp;
+  save(m: Message, emp?:Employe): Observable<Message>{
+    if(emp!=undefined){
+      m.emetteur=emp;
+    }
 
-    return this.http.post<Message>(this.host + '/message/',m);
+    return this.http.post<Message>(this.host + '/message',m);
   }
   updateMessage(m: Message): Observable<Message>{
     return this.http.put<Message>(this.host + '/message/' +
-      m.id_message, m);
+      m.idmessage, m);
   }
   getMessageEmploye(idEmp: number) : Observable<Message[]>{
     return this.http.get<Message[]>(this.host + '/message/idemploye=' +
       idEmp);
+  }
+  getMessage(idMessage: number) : Observable<Message>{
+    return this.http.get<Message>(this.host + '/message/' +
+      idMessage);
   }
 }

@@ -22,7 +22,7 @@ export class EmployeService{
     return this.http.delete<void>(this.host + '/employe/' + e.idemploye);
   }
   save(e: Employe): Observable<Employe>{
-    return this.http.post<Employe>(this.host + '/employe/', e);
+    return this.http.post<Employe>(this.host + '/employe', e);
   }
 
   updateEmploye(e: Employe): Observable<Employe>{

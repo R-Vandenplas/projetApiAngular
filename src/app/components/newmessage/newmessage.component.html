@@ -1,0 +1,59 @@
+<div class="container">
+  <form [formGroup]="messageFormGroup" *ngIf="messageFormGroup">
+
+    <table class="table">
+      <thead>
+      <th>Objet</th>
+      <th>Contenu</th>
+      <th>Date d'envoi</th>
+      </thead>
+      <tbody>
+
+      <ng-template #vide>
+        <td></td>
+      </ng-template>
+      <td>
+      <div class="form-group">
+      <input type="text" formControlName="objet" class="form-control"
+                 [ngClass]="{'is-invalid': submitted && messageFormGroup.controls.objet.errors}">
+        <div *ngIf="submitted && messageFormGroup.controls.objet.errors" class="invalid-feedback">
+          <div *ngIf="messageFormGroup.controls.objet.errors.required">L'objet est obligatoire</div>
+        </div>
+      </div></td>
+
+
+      <td>
+      <div class="form-group">
+        <input type="text" formControlName="contenu" class="form-control"
+                 [ngClass]="{'is-invalid': submitted && messageFormGroup.controls.contenu.errors}">
+        <div *ngIf="submitted && messageFormGroup.controls.contenu.errors" class="invalid-feedback">
+          <div *ngIf="messageFormGroup.controls.contenu.errors.required">Le contenu est obligatoire</div>
+        </div>
+      </div></td>
+
+      <td>
+      <div class="form-group">
+      <input type="date" formControlName="dateenvoi" class="form-control"
+                 [ngClass]="{'is-invalid': submitted && messageFormGroup.controls.dateenvoi.errors}">
+        <div *ngIf="submitted && messageFormGroup.controls.dateenvoi.errors" class="invalid-feedback">
+
+          <div *ngIf="messageFormGroup.controls.dateenvoi.errors.required">
+            La date d'envoi est obligatoire
+          </div>
+          <div *ngIf="messageFormGroup.controls.dateenvoi.errors.futureDate">
+            La date ne peut pas être dans le futur
+          </div>
+
+        </div>
+      </div></td>
+      </tbody>
+    </table>
+
+
+
+
+    <button (click)="onSaveMessage()" class="btn btn-success">
+      Save
+    </button>
+  </form>
+</div>

@@ -1,6 +1,8 @@
 export interface Service{
-    id_service: number;
+    idservice: number;
     nom: string;
     budget: number;
+
+
 
 }
