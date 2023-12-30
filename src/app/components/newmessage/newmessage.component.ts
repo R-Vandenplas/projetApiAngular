@@ -40,7 +40,7 @@ export class NewmessageComponent {
       return;
     }
 
-    this.messageService.save(this.messageFormGroup?.value,this.empact).subscribe(data => {alert('sauvegarde ok');this.newMessage.emit(data);this.messageFormGroup?.reset() },
+    this.messageService.save(this.messageFormGroup?.value,this.empact).subscribe(data => {alert('sauvegarde ok');this.newMessage.emit(data);this.messageFormGroup?.reset();this.submitted=false; },
       err => {
         alert(err.headers.get("error"));
       });
