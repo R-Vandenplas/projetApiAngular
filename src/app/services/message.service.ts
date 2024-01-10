@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs';
 import {Message} from '../entities/message.entities';
@@ -33,4 +33,13 @@ export class MessageService{
     return this.http.get<Message>(this.host + '/message/' +
       idMessage);
   }
+  getMessages(idEmp: number, date1: Date, date2: Date): Observable<Message[]> {
+    const params = new HttpParams()
+      .set('idemploye', idEmp.toString())
+      .set('date1', formatDate(date1, 'dd-MM-yyyy', 'en'))
+      .set('date2', formatDate(date2, 'dd-MM-yyyy', 'en'));
+
+    return this.http.get<Message[]>(this.host + '/message/dates', { params });
+  }
+
 }

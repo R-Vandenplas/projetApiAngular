@@ -58,10 +58,36 @@
   </form>
 
   <li class="nav-item">
+
     <button (click)="ChargeMessages()" class="btn btn-success">
       Messsages
     </button>
   </li>
+  <form [formGroup]="dateFormGroupe" *ngIf="dateFormGroupe">
+     <div class="form-group">
+      <label>Date de debut</label>
+      <input type ="date" class="form-control"
+             formControlName="date1" [ngClass]="{'is-invalid': dateSubmitted &&
+      dateFormGroupe.controls.date1.errors}">
+
+
+      </div>
+    <div class="form-group">
+      <label>Date de fin de recherche</label>
+      <input type ="date" class="form-control"
+             formControlName="date2" [ngClass]="{'is-invalid': dateSubmitted &&
+      dateFormGroupe.controls.date2.errors}">
+
+
+    </div>
+  </form>
+  <li class="nav-item">
+
+    <button (click)="ChargeMessagesDate()" class="btn btn-success">
+      Messsages entre 2 dates
+    </button>
+  </li>
+
 
 
   <ng-container *ngIf="messages" >
@@ -92,9 +118,15 @@
 
         </tr>
         </tbody>
+
       </table>
+      <div id="objet" *ngIf="allMessages">
+          <label>Objet rechercher :</label>
+          <input type="text" class="objet" id="inputObjet" (change)="filterObjet()">
+      </div>
     </ng-container>
-    <ng-template #vide>
+
+    <ng-template #vide >
       Aucun message pour cet employe
     </ng-template>
   </ng-container>

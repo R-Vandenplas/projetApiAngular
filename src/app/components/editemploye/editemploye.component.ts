@@ -7,6 +7,7 @@ import {ServiceService} from "../../services/service.service";
 import {Message} from "../../entities/message.entities";
 import {MessageService} from "../../services/message.service";
 import {Employe} from "../../entities/employe.entities";
+import {futureDateValidator} from "../newmessage/newmessage.component";
 @Component({
     selector: 'app-editemploye',
     styleUrls: ['./editemploye.component.css'],
@@ -19,6 +20,11 @@ export class EditemployeComponent implements OnInit {
   services: Service[] = [];
   messages?: Message[];
   employe: Employe ={idemploye:0,mail:"",nom:"",prenom:"",service:{idservice:0,nom:"",budget:0}};
+
+  dateFormGroupe?: FormGroup;
+  dateSubmitted = false;
+  allMessages : boolean = false;
+  messagesCharged? : Message[];
 
   constructor(private employeService: EmployeService,private messageService : MessageService,private fb:
     FormBuilder,activatedRoute : ActivatedRoute,private serviceService:ServiceService,private router:Router) {
@@ -35,7 +41,15 @@ export class EditemployeComponent implements OnInit {
         idservice:[employe.service.idservice,Validators.required]
       })
         this.employe=employe;
+        let date=new Date();
+        date.setDate(date.getDate()+1);
+        this.dateFormGroupe = this.fb.group({
+          date1: [date],
+          date2: [date]
+        });
       });
+
+
   }
   onUpdateEmploye(): void {
       this.submitted = true;
@@ -59,10 +73,29 @@ export class EditemployeComponent implements OnInit {
         this.serviceService.getAllServices().subscribe(data=>this.services=data);
     }
   ChargeMessages() {
-    this.messageService.getMessageEmploye(this.idEmploye).subscribe(data => {this.messages=data},
+    this.allMessages = true;
+    this.messageService.getMessageEmploye(this.idEmploye).subscribe(data => {this.messages=data ; this.messagesCharged=data;},
       err => {
         alert(err.headers.get("error"));
       });
+
+
+
+  }
+  ChargeMessagesDate() {
+    this.dateSubmitted= true;
+    if (this.dateFormGroupe?.invalid) {
+      return;
+    }
+    let date1=this.dateFormGroupe?.value.date1;
+    let date2=this.dateFormGroupe?.value.date2;
+
+
+this.messageService.getMessages(this.idEmploye,date1,date2).subscribe(data => {this.messages=data},
+      err => {
+        alert(err.headers.get("error"));
+      });
+
   }
   onEditMes(mes:Message):void{
     this.router.navigateByUrl('editMessage/' + mes.idmessage );
@@ -86,6 +119,16 @@ export class EditemployeComponent implements OnInit {
     this.router.navigateByUrl('editEmploye/' + this.idEmploye );
     this.ChargeMessages();
   }
-
+  filterObjet(){
+    let objet = document.getElementById("inputObjet") as HTMLInputElement;
+    let objetValue = objet.value.toLowerCase();
+    let x=this.messagesCharged?.filter(mes => mes.objet.toLowerCase()==objetValue);
+    if(x && x.length<1){
+      alert("aucun message ne contient l'objet : "+objetValue);
+    }
+    else{
+      this.messages=x;
+    }
+  }
 
 }
